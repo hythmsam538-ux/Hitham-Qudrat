@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الدكتور في القدرات</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: #0B0B18;
+    color: #fff;
+    min-height: 100vh;
+  }
+
+  /* ── توب بار ── */
+  .topbar {
+    background: linear-gradient(90deg, #1a0a3c, #0d1a3c);
+    border-bottom: 2px solid #F5A623;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .topbar-title { font-size: 20px; font-weight: 900; color: #F5A623; }
+
+  /* ── هيرو ── */
+  .hero {
+    max-width: 720px;
+    margin: 40px auto 0;
+    padding: 0 20px;
+    text-align: center;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(245,166,35,0.12);
+    border: 1px solid rgba(245,166,35,0.4);
+    color: #F5A623;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 5px 20px;
+    border-radius: 50px;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: clamp(20px, 5vw, 32px);
+    font-weight: 900;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .hero h1 span { color: #F5A623; }
+  .hero-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 30px;
+  }
+
+  /* ── للمن الملف ── */
+  .who-section {
+    max-width: 720px;
+    margin: 0 auto 36px;
+    padding: 0 20px;
+  }
+  .who-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .who-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .who-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(245,166,35,0.18);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.82);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+  .who-card .em { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+
+  /* ── محتوى الملف ── */
+  .content-section {
+    max-width: 720px;
+    margin: 0 auto 36px;
+    padding: 0 20px;
+  }
+  .content-box {
+    background: linear-gradient(135deg, rgba(108,60,225,0.08), rgba(245,166,35,0.06));
+    border: 1px solid rgba(245,166,35,0.2);
+    border-radius: 18px;
+    padding: 24px 24px 20px;
+  }
+  .content-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #F5A623;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .content-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .content-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.55;
+  }
+  .content-list li::before {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #F5A623;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  /* ── عداد + سعر ── */
+  .counter-price-wrap {
+    max-width: 720px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .counter-wrap {
+    background: linear-gradient(135deg, #1a0a3c, #0d1228);
+    border: 1px solid rgba(245,166,35,0.3);
+    border-radius: 18px;
+    padding: 24px 40px;
+    text-align: center;
+    width: 100%;
+    max-width: 360px;
+    position: relative;
+    overflow: hidden;
+  }
+  .counter-wrap::before {
+    content: '';
+    position: absolute; inset: -1px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #F5A623, #6C3CE1, #F5A623);
+    z-index: -1;
+  }
+  .counter-wrap::after {
+    content: '';
+    position: absolute; inset: 1px;
+    border-radius: 17px;
+    background: linear-gradient(135deg, #1a0a3c, #0d1228);
+    z-index: -1;
+  }
+  .counter-label  { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+  .counter-num    { font-size: 64px; font-weight: 900; color: #F5A623; line-height: 1; text-shadow: 0 0 30px rgba(245,166,35,0.5); letter-spacing: -2px; }
+  .counter-suffix { font-size: 14px; color: rgba(255,255,255,0.65); margin-top: 6px; font-weight: 600; }
+
+  .price-box {
+    background: linear-gradient(135deg, rgba(245,166,35,0.1), rgba(108,60,225,0.08));
+    border: 2px solid #F5A623;
+    border-radius: 18px;
+    padding: 20px 40px;
+    text-align: center;
+    width: 100%;
+    max-width: 360px;
+  }
+  .price-main {
+    font-size: 52px;
+    font-weight: 900;
+    color: #F5A623;
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(245,166,35,0.35);
+  }
+  .price-main span { font-size: 20px; }
+  .price-note {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+  .price-note strong { color: #F5A623; }
+
+  /* ── section عام ── */
+  .section {
+    max-width: 860px;
+    margin: 0 auto 48px;
+    padding: 0 20px;
+  }
+  .section-title {
+    font-size: 17px; font-weight: 700; color: #F5A623;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: rgba(245,166,35,0.2); }
+
+  .images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .img-card {
+    aspect-ratio: 4/3;
+    border-radius: 14px;
+    border: 2px dashed rgba(245,166,35,0.22);
+    background: rgba(255,255,255,0.03);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.22);
+    font-size: 13px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .img-card:hover { border-color: rgba(245,166,35,0.5); }
+  .img-card .icon { font-size: 34px; opacity: 0.35; }
+  .img-card img,
+  .img-card video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; border-radius: 12px;
+    pointer-events: none;
+  }
+  .play-icon {
+    position: absolute; font-size: 44px;
+    pointer-events: none; z-index: 2;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+  }
+
+  /* ── PDF ── */
+  .pdf-section {
+    max-width: 860px;
+    margin: 0 auto 48px;
+    padding: 0 20px;
+  }
+  .pdf-viewer-wrap {
+    background: rgba(255,255,255,0.03);
+    border: 2px dashed rgba(245,166,35,0.28);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+  }
+  .pdf-timer-bar {
+    background: rgba(245,166,35,0.08);
+    border-bottom: 1px solid rgba(245,166,35,0.15);
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .pdf-timer-label { color: rgba(255,255,255,0.55); }
+  .pdf-timer-count { color: #F5A623; font-weight: 700; font-size: 15px; }
+  .pdf-frame-placeholder {
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: rgba(255,255,255,0.28);
+  }
+  .pdf-frame-placeholder .pdf-icon { font-size: 52px; }
+  .pdf-frame-placeholder p { font-size: 13px; line-height: 1.7; text-align: center; max-width: 280px; }
+  .pdf-frame-placeholder small { font-size: 11px; color: rgba(255,255,255,0.18); }
+  /* لما تضع PDF حقيقي: احذف placeholder وافك التعليق عن الـ iframe */
+  /* .pdf-iframe { width:100%; height:500px; border:none; pointer-events:none; } */
+  .pdf-expired-overlay {
+    display: none;
+    position: absolute; inset: 0;
+    background: rgba(11,11,24,0.93);
+    backdrop-filter: blur(10px);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    padding: 30px;
+  }
+  .pdf-expired-overlay.show { display: flex; }
+  .pdf-expired-overlay h3 { font-size: 18px; color: #F5A623; }
+  .pdf-expired-overlay p  { font-size: 14px; color: rgba(255,255,255,0.55); max-width: 270px; line-height: 1.6; }
+
+  /* ── سلايدر ── */
+  .slider-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+  .slider-track {
+    display: flex;
+    transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+  }
+  .slide-item {
+    min-width: 100%;
+    aspect-ratio: 4/3;
+    border-radius: 14px;
+    border: 2px dashed rgba(245,166,35,0.22);
+    background: rgba(255,255,255,0.03);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.22);
+    font-size: 13px;
+    overflow: hidden;
+    position: relative;
+  }
+  .slide-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    position: absolute; inset: 0;
+    border-radius: 12px;
+  }
+  .slide-item .icon { font-size: 34px; opacity: 0.35; }
+
+  .slider-btn {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(245,166,35,0.35);
+    color: #F5A623;
+    font-size: 22px;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 10;
+    transition: background 0.2s;
+    line-height: 1;
+  }
+  .slider-btn:hover { background: rgba(245,166,35,0.15); }
+  .slider-btn.prev { right: 10px; }
+  .slider-btn.next { left: 10px; }
+
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 12px;
+  }
+  .dot-ind {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(245,166,35,0.22);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .dot-ind.active { background: #F5A623; transform: scale(1.3); }
+
+  /* ── CTA ── */
+  .cta-wrap {
+    text-align: center;
+    padding: 10px 20px 60px;
+  }
+  .cta-heading {
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 6px;
+  }
+  .cta-heading span { color: #F5A623; }
+  .cta-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 22px;
+  }
+  .btn-row {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 12px; margin-bottom: 14px;
+  }
+  .btn-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-weight: 800; font-size: 15px; font-family: 'Cairo', sans-serif;
+    padding: 13px 28px; border-radius: 50px;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-cta:hover { transform: translateY(-3px); }
+  .btn-wa    { background: linear-gradient(135deg, #25D366, #128C4A); color: #fff; box-shadow: 0 8px 24px rgba(37,211,102,0.3); }
+  .btn-insta { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: #fff; box-shadow: 0 8px 24px rgba(220,39,67,0.3); }
+  .btn-tele  { background: linear-gradient(135deg, #2AABEE, #0088CC); color: #fff; box-shadow: 0 8px 24px rgba(0,136,204,0.3); }
+  .btn-tiktok{ background: linear-gradient(135deg, #010101, #1a1a2e); color: #fff; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  .cta-note  { font-size: 13px; color: rgba(255,255,255,0.35); margin-top: 4px; }
+  .cta-note span { color: #F5A623; font-weight: 600; }
+
+  .divider {
+    max-width: 860px;
+    margin: 0 auto 36px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(245,166,35,0.18), transparent);
+  }
+
+  /* ── Lightbox ── */
+  #lightbox {
+    display: none;
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.93);
+    backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+  }
+  #lightbox.open { display: flex; }
+  #lightbox img, #lightbox video {
+    max-width: 92vw; max-height: 88vh;
+    border-radius: 14px;
+    box-shadow: 0 0 60px rgba(0,0,0,0.8);
+    object-fit: contain;
+    animation: zoomIn 0.2s ease;
+  }
+  #lightbox video { background: #000; }
+  @keyframes zoomIn {
+    from { transform: scale(0.85); opacity: 0; }
+    to   { transform: scale(1);    opacity: 1; }
+  }
+  #lightbox-close {
+    position: absolute; top: 18px; left: 18px;
+    width: 42px; height: 42px; border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff; font-size: 22px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  #lightbox-close:hover { background: rgba(255,255,255,0.25); }
+</style>
+</head>
+<body>
+
+<!-- شريط علوي -->
+<div class="topbar">
+  <div class="topbar-title">⭐ الدكتور في القدرات</div>
+  <div style="font-size:13px; color:rgba(255,255,255,0.45);">هيثم عصام</div>
+</div>
+
+<!-- هيرو -->
+<div class="hero">
+  <div class="hero-badge">📚 ملف القدرات الكمي الشامل</div>
+  <h1>خلاصة الكمي في ملف واحد<br><span>يوفر وقتك ويرفع درجتك</span></h1>
+  <div class="hero-sub">قدرات كمي — تأسيس + شرح + أسئلة أصلية + جدول مذاكرة</div>
+</div>
+
+<!-- لمن الملف -->
+<div class="who-section">
+  <div class="who-title">الملف مناسب لك إذا كنت…</div>
+  <div class="who-grid">
+    <div class="who-card"><span class="em">🏗️</span><span>تريد تأسيساً قوياً من الصفر في الكمي</span></div>
+    <div class="who-card"><span class="em">⚡</span><span>تبحث عن مراجعة سريعة ومركّزة</span></div>
+    <div class="who-card"><span class="em">📅</span><span>اختبارك قريب وتريد إنجاز أكبر قدر في وقت قصير</span></div>
+    <div class="who-card"><span class="em">🎯</span><span>تريد شرحاً مختصراً مع أسئلة مباشرة لكل موضوع</span></div>
+  </div>
+</div>
+
+<!-- محتوى الملف -->
+<div class="content-section">
+  <div class="content-box">
+    <div class="content-title">📋 ماذا يحتوي الملف؟</div>
+    <ul class="content-list">
+      <li>31 موضوع كمي كامل — من الأساسيات حتى المتقدم</li>
+      <li>شرح مركّز لكل موضوع + 3 أسئلة أصلية تحته مباشرة</li>
+      <li>جدول مذاكرة منظّم يساعدك على توزيع وقتك</li>
+      <li>نصائح عملية وطريقة مذاكرة مجرّبة</li>
+    </ul>
+  </div>
+</div>
+
+<!-- عداد فوق السعر -->
+<div class="counter-price-wrap">
+  <div class="counter-wrap">
+    <div class="counter-label">انضم إليهم وسجّل اشتراكك</div>
+    <div class="counter-num">307</div>
+    <div class="counter-suffix">مشترك وثقوا في الملف 🎯</div>
+  </div>
+  <div class="price-box">
+    <div class="price-main">15 <span>ريال</span></div>
+    <div class="price-note">السعر حساب المجهود فقط — <strong>الهدف الأول إفادتك</strong></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- مقدمة من الملف -->
+<div class="section">
+  <div class="section-title">📸 مقدمة من الملف</div>
+  <div class="images-grid">
+    <div class="img-card" onclick="openLightbox(this)">
+      <img src="1.png" onerror="this.style.display='none'" alt="">
+      <span class="icon">🖼️</span><span>ضع صورتك هنا</span>
+    </div>
+    <div class="img-card" onclick="openLightbox(this)">
+      <img src="2.png" onerror="this.style.display='none'" alt="">
+      <span class="icon">🖼️</span><span>ضع صورتك هنا</span>
+    </div>
+    <div class="img-card" onclick="openLightbox(this)">
+      <img src="3 (2).png" onerror="this.style.display='none'" alt="">
+      <span class="icon">🖼️</span><span>ضع صورتك هنا</span>
+    </div>
+    <div class="img-card" onclick="openLightbox(this)">
+      <img src="4.png" onerror="this.style.display='none'" alt="">
+      <span class="icon">🖼️</span><span>ضع صورتك هنا</span>
+    </div>
+  </div>
+</div>
+
+<!-- لمحة من الملف -->
+<div class="section">
+  <div class="section-title">🔍 لمحة من الملف</div>
+  <div class="images-grid">
+    <div class="img-card" onclick="openLightbox(this)">
+      <img src="5.png" onerror="this.style.display='none'" alt="">
+      <span class="icon">📄</span><span>ضع صورتك هنا</span>
+    </div>
+    <div class="img-card" onclick="openLightbox(this)">
+      <img src="6.png" onerror="this.style.display='none'" alt="">
+      <span class="icon">📄</span><span>ضع صورتك هنا</span>
+    </div>
+    <div class="img-card" onclick="openLightbox(this)">
+      <img src="7.png" onerror="this.style.display='none'" alt="">
+      <span class="icon">📄</span><span>ضع صورتك هنا</span>
+    </div>
+    <!-- فيديو -->
+    <div class="img-card" onclick="openLightbox(this)">
+      <video src="v.mp4" muted playsinline preload="metadata"></video>
+      <span class="play-icon">▶️</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+
+
+<!-- سلايدر تعليقات المستفيدين -->
+<div class="section">
+  <div class="section-title">💬 آراء المستفيدين</div>
+  <div class="slider-wrap">
+    <div class="slider-track" id="sliderTrack">
+      <!-- ✏️ ضع صور التعليقات باسم review1.jpg ... review10.jpg في نفس المجلد -->
+      <div class="slide-item"><img src="review1.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 1</span></div>
+      <div class="slide-item"><img src="review2.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 2</span></div>
+      <div class="slide-item"><img src="review3.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 3</span></div>
+      <div class="slide-item"><img src="review4.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 4</span></div>
+      <div class="slide-item"><img src="review5.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 5</span></div>
+      <div class="slide-item"><img src="review6.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 6</span></div>
+      <div class="slide-item"><img src="review7.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 7</span></div>
+      <div class="slide-item"><img src="review8.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 8</span></div>
+      <div class="slide-item"><img src="review9.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 9</span></div>
+      <div class="slide-item"><img src="review10.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 10</span></div>
+            <div class="slide-item"><img src="review11.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 10</span></div>
+      <div class="slide-item"><img src="review12.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 10</span></div>
+      <div class="slide-item"><img src="review13.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 10</span></div>
+
+    </div>
+    <button class="slider-btn prev" onclick="moveSlide(-1)">‹</button>
+    <button class="slider-btn next" onclick="moveSlide(1)">›</button>
+  </div>
+  <div class="slider-dots" id="sliderDots"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- أزرار التواصل -->
+<div class="cta-wrap">
+  <div class="cta-heading">اشترِ الآن وابدأ رحلتك  🚀<br><span>  بعد الاطلاع أطلب عن طريق وسائل التواصل</span></div>
+  <div class="cta-sub">بعد الشراء شاركنا تقييمك في كومنت التيك توك 🙏</div>
+  <div class="btn-row">
+    <a class="btn-cta btn-wa"     href="https://wa.me/966547856086"                                   target="_blank"> واتساب</a>
+    <a class="btn-cta btn-insta"  href="https://instagram.com/dr_hith_oom"                            target="_blank"> انستا</a>
+    <a class="btn-cta btn-tele"   href="https://t.me/Dr_hith_oom"                                     target="_blank"> تيليجرام</a>
+    <a class="btn-cta btn-tiktok" href="https://www.tiktok.com/@dr.hithoom7?_r=1&_t=ZS-96ZTfEGlpa8" target="_blank"> تيك توك</a>
+  </div>
+  <div class="cta-note" style="margin-top:10px; color:rgba(252, 248, 12, 0.973);">جهد حقيقي قُدِّم بصدق لأجلك — ادعُ لي ولوالديّ 🤍</div>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <div id="lightbox-close" onclick="closeLightbox()">✕</div>
+  <img   id="lightbox-img" src="" alt="" style="display:none">
+  <video id="lightbox-vid" controls style="display:none"></video>
+</div>
+
+<script>
+  /* ── Lightbox ── */
+  function openLightbox(card) {
+    const img  = card.querySelector('img');
+    const vid  = card.querySelector('video');
+    const lb   = document.getElementById('lightbox');
+    const lImg = document.getElementById('lightbox-img');
+    const lVid = document.getElementById('lightbox-vid');
+    if (vid) {
+      lImg.style.display = 'none';
+      lVid.src = vid.src; lVid.style.display = 'block'; lVid.play();
+    } else if (img && img.style.display !== 'none') {
+      lVid.style.display = 'none';
+      lImg.src = img.src; lImg.style.display = 'block';
+    } else { return; }
+    lb.classList.add('open');
+  }
+  function closeLightbox() {
+    const lVid = document.getElementById('lightbox-vid');
+    lVid.pause(); lVid.src = ''; lVid.style.display = 'none';
+    const lImg = document.getElementById('lightbox-img');
+    lImg.src = ''; lImg.style.display = 'none';
+    document.getElementById('lightbox').classList.remove('open');
+  }
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  /* ── سلايدر ── */
+  const track = document.getElementById('sliderTrack');
+  const dotsWrap = document.getElementById('sliderDots');
+  const total = track.children.length;
+  let current = 0;
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot-ind' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsWrap.appendChild(d);
+  }
+  function goTo(n) {
+    current = (n + total) % total;
+    track.style.transform = `translateX(${current * 100}%)`;
+    document.querySelectorAll('.dot-ind').forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+  function moveSlide(dir) { goTo(current - dir); }
+  setInterval(() => moveSlide(1), 4000);
+
+  /* ── عداد PDF ── */
+  let seconds = 120;
+  const timerEl = document.getElementById('pdf-timer');
+  const overlay = document.getElementById('pdf-overlay');
+  const pdfInt = setInterval(() => {
+    seconds--;
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    timerEl.textContent = `${m}:${s.toString().padStart(2,'0')}`;
+    if (seconds <= 0) {
+      clearInterval(pdfInt);
+      overlay.classList.add('show');
+      // document.getElementById('pdf-frame').src = '';
+    }
+  }, 1000);
+</script>
+</body>
+</html>
