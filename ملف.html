@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الدكتور في القدرات</title>
+<title>الدكتور في القدرات - ملف الكمي في 6 أيام</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -59,6 +59,27 @@
     margin-bottom: 30px;
   }
 
+  /* ── تنبيه قبل الشراء ── */
+  .warn-box {
+    max-width: 720px;
+    margin: 0 auto 30px;
+    padding: 0 20px;
+  }
+  .warn-inner {
+    background: rgba(245,166,35,0.08);
+    border: 1px solid rgba(245,166,35,0.35);
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.7;
+  }
+  .warn-inner .em { font-size: 20px; flex-shrink: 0; }
+  .warn-inner strong { color: #F5A623; }
+
   /* ── للمن الملف ── */
   .who-section {
     max-width: 720px;
@@ -89,9 +110,10 @@
     gap: 10px;
     line-height: 1.5;
   }
+  .who-card.not-fit { border-color: rgba(255,90,90,0.25); }
   .who-card .em { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
 
-  /* ── محتوى الملف ── */
+  /* ── محتوى الملف / خطة الأيام ── */
   .content-section {
     max-width: 720px;
     margin: 0 auto 36px;
@@ -112,11 +134,37 @@
     align-items: center;
     gap: 8px;
   }
+  .day-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .day-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+  }
+  .day-num {
+    flex-shrink: 0;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: rgba(245,166,35,0.15);
+    border: 1px solid rgba(245,166,35,0.4);
+    color: #F5A623;
+    font-weight: 900;
+    font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+  }
   .content-list {
     list-style: none;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-top: 16px;
   }
   .content-list li {
     display: flex;
@@ -248,62 +296,6 @@
     text-shadow: 0 2px 12px rgba(0,0,0,0.7);
   }
 
-  /* ── PDF ── */
-  .pdf-section {
-    max-width: 860px;
-    margin: 0 auto 48px;
-    padding: 0 20px;
-  }
-  .pdf-viewer-wrap {
-    background: rgba(255,255,255,0.03);
-    border: 2px dashed rgba(245,166,35,0.28);
-    border-radius: 16px;
-    overflow: hidden;
-    position: relative;
-  }
-  .pdf-timer-bar {
-    background: rgba(245,166,35,0.08);
-    border-bottom: 1px solid rgba(245,166,35,0.15);
-    padding: 10px 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 13px;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .pdf-timer-label { color: rgba(255,255,255,0.55); }
-  .pdf-timer-count { color: #F5A623; font-weight: 700; font-size: 15px; }
-  .pdf-frame-placeholder {
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    color: rgba(255,255,255,0.28);
-  }
-  .pdf-frame-placeholder .pdf-icon { font-size: 52px; }
-  .pdf-frame-placeholder p { font-size: 13px; line-height: 1.7; text-align: center; max-width: 280px; }
-  .pdf-frame-placeholder small { font-size: 11px; color: rgba(255,255,255,0.18); }
-  /* لما تضع PDF حقيقي: احذف placeholder وافك التعليق عن الـ iframe */
-  /* .pdf-iframe { width:100%; height:500px; border:none; pointer-events:none; } */
-  .pdf-expired-overlay {
-    display: none;
-    position: absolute; inset: 0;
-    background: rgba(11,11,24,0.93);
-    backdrop-filter: blur(10px);
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 12px;
-    text-align: center;
-    padding: 30px;
-  }
-  .pdf-expired-overlay.show { display: flex; }
-  .pdf-expired-overlay h3 { font-size: 18px; color: #F5A623; }
-  .pdf-expired-overlay p  { font-size: 14px; color: rgba(255,255,255,0.55); max-width: 270px; line-height: 1.6; }
-
   /* ── سلايدر ── */
   .slider-wrap {
     position: relative;
@@ -370,6 +362,296 @@
     transition: background 0.2s, transform 0.2s;
   }
   .dot-ind.active { background: #F5A623; transform: scale(1.3); }
+
+  /* ── زر العجلة العائم ── */
+  .wheel-fab {
+    position: fixed;
+    bottom: 22px;
+    left: 18px;
+    z-index: 500;
+    width: 66px; height: 66px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #F5A623, #ffd27a);
+    border: 3px solid #1a0a3c;
+    box-shadow: 0 8px 26px rgba(245,166,35,0.55);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30px;
+    cursor: pointer;
+    animation: fabPulse 1.8s ease-in-out infinite;
+  }
+  .wheel-fab .fab-badge {
+    position: absolute;
+    top: -4px; right: -4px;
+    background: #ff3b3b;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 7px;
+    border-radius: 50px;
+    border: 2px solid #0B0B18;
+    white-space: nowrap;
+  }
+  .wheel-fab .fab-label {
+    position: absolute;
+    bottom: 76px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    color: #F5A623;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  @keyframes fabPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 8px 26px rgba(245,166,35,0.55); }
+    50% { transform: scale(1.08); box-shadow: 0 8px 34px rgba(245,166,35,0.8); }
+  }
+
+  /* ── نافذة عجلة الحظ ── */
+  #wheelModal {
+    display: none;
+    position: fixed; inset: 0; z-index: 9997;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  #wheelModal.open { display: flex; }
+  #wheelModal .wheel-modal-inner { position: relative; width: 100%; max-width: 400px; margin: auto; }
+  #wheelModal-close {
+    position: absolute; top: -14px; left: -14px;
+    width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff; font-size: 18px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2;
+  }
+
+  /* ── عجلة الحظ ── */
+  .wheel-card {
+    background: linear-gradient(135deg, rgba(108,60,225,0.15), rgba(245,166,35,0.08));
+    border: 1px solid rgba(245,166,35,0.3);
+    border-radius: 22px;
+    padding: 26px 20px 30px;
+    text-align: center;
+  }
+  .wheel-intro { font-size: 13.5px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 6px; }
+  .wheel-attempts {
+    display: inline-block;
+    background: rgba(245,166,35,0.12);
+    border: 1px solid rgba(245,166,35,0.35);
+    color: #F5A623;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 5px 16px;
+    border-radius: 50px;
+    margin: 10px 0 24px;
+  }
+  .wheel-outer {
+    position: relative;
+    width: 260px; height: 260px;
+    margin: 0 auto 22px;
+  }
+  .wheel-pointer {
+    position: absolute;
+    top: -6px; left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 24px solid #F5A623;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    z-index: 5;
+  }
+  .wheel {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    border: 6px solid #F5A623;
+    box-shadow: 0 0 0 3px rgba(11,11,24,1), 0 0 40px rgba(245,166,35,0.35);
+    position: relative;
+    transition: transform 4.2s cubic-bezier(.17,.67,.16,.99);
+  }
+  .wheel-center {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#F5A623,#c77c2e);
+    border: 3px solid #0B0B18;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    z-index: 4;
+    box-shadow: 0 0 20px rgba(245,166,35,0.6);
+  }
+  .wheel-labels {
+    position: absolute; inset: 0;
+    pointer-events: none;
+  }
+  .wheel-labels span {
+    position: absolute;
+    font-size: 10.5px;
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+    width: 70px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .btn-spin {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    color: #0B0B18;
+    background: linear-gradient(135deg, #F5A623, #ffd27a);
+    border: none;
+    padding: 13px 40px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(245,166,35,0.4);
+    transition: transform 0.2s;
+  }
+  .btn-spin:hover:not(:disabled) { transform: translateY(-3px); }
+  .btn-spin:disabled {
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.35);
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+  .wheel-done-msg {
+    font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 14px; line-height: 1.7;
+  }
+
+  /* ── نافذة نتيجة العجلة ── */
+  #resultModal {
+    display: none;
+    position: fixed; inset: 0; z-index: 9998;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  #resultModal.open { display: flex; }
+  .result-box {
+    background: linear-gradient(160deg, #1a0a3c, #0d1228);
+    border: 2px solid #F5A623;
+    border-radius: 22px;
+    max-width: 340px;
+    width: 100%;
+    padding: 30px 24px 26px;
+    text-align: center;
+    animation: zoomIn 0.25s ease;
+    position: relative;
+  }
+  .result-emoji { font-size: 42px; margin-bottom: 8px; }
+  .result-title { font-size: 17px; font-weight: 900; color: #F5A623; margin-bottom: 4px; }
+  .result-sub { font-size: 12.5px; color: rgba(255,255,255,0.5); margin-bottom: 18px; }
+  .result-code-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 6px; }
+  .result-percent {
+    font-size: 44px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #F5A623, #fff2d6, #F5A623);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding: 10px 10px;
+    border: 1.5px dashed rgba(245,166,35,0.5);
+    border-radius: 14px;
+    margin-bottom: 16px;
+    text-shadow: 0 0 20px rgba(245,166,35,0.3);
+  }
+  .result-price-row {
+    display: flex; justify-content: center; align-items: baseline; gap: 10px;
+    margin-bottom: 14px;
+  }
+  .result-old { font-size: 15px; color: rgba(255,255,255,0.35); text-decoration: line-through; }
+  .result-new { font-size: 30px; font-weight: 900; color: #F5A623; }
+  .result-expiry {
+    font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.7; margin-bottom: 18px;
+  }
+  .result-expiry strong { color: #F5A623; }
+  .result-note {
+    font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.7;
+    background: rgba(245,166,35,0.07);
+    border-radius: 10px; padding: 10px 12px; margin-bottom: 16px;
+  }
+  .btn-close-result {
+    font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 13px;
+    color: #fff; background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 9px 26px; border-radius: 50px; cursor: pointer;
+  }
+
+  /* ── طرق الدفع ── */
+  .pay-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .pay-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(245,166,35,0.2);
+    border-radius: 16px;
+    padding: 16px;
+  }
+  .pay-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border-radius: 12px;
+    border: 2px dashed rgba(245,166,35,0.22);
+    background: rgba(255,255,255,0.03);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.22);
+    font-size: 13px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .pay-img img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; border-radius: 10px;
+  }
+  .pay-img .icon { font-size: 30px; opacity: 0.35; }
+  .pay-iban-label { font-size: 11.5px; color: rgba(255,255,255,0.45); margin-bottom: 6px; }
+  .pay-iban-row {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(245,166,35,0.25);
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+  .pay-iban-text {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #F5A623;
+    direction: ltr;
+    text-align: right;
+    word-break: break-all;
+  }
+  .pay-copy-btn {
+    flex-shrink: 0;
+    font-family: 'Cairo', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #0B0B18;
+    background: #F5A623;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .pay-copy-btn:hover { transform: translateY(-2px); }
+  .pay-copy-btn.copied { background: #25D366; }
 
   /* ── CTA ── */
   .cta-wrap {
@@ -456,31 +738,51 @@
 
 <!-- هيرو -->
 <div class="hero">
-  <div class="hero-badge">📚 ملف القدرات الكمي الشامل</div>
-  <h1>خلاصة الكمي في ملف واحد<br><span>يوفر وقتك ويرفع درجتك</span></h1>
-  <div class="hero-sub">قدرات كمي — تأسيس + شرح + أسئلة أصلية + جدول مذاكرة</div>
+  <div class="hero-badge">📚 ملف الكمي في 6 أيام</div>
+  <h1>أنهِ الكمي كاملاً في <span>6 أيام</span><br>خطة مكثفة تلحق وقتك وترفع درجتك</h1>
+  <div class="hero-sub">قدرات كمي — خطة يومية + شرح مركّز و بسيط + 31 مواضيع الكمي كاملة + شرح وحل</div>
+</div>
+
+<!-- تنبيه قبل الشراء -->
+<div class="warn-box">
+  <div class="warn-inner">
+    <span class="em">⚠️</span>
+    <span><strong>قبل الشراء:</strong> تأكد أن هذا الملف مناسب لمستواك واحتياجك. الملف مبني على خطة مكثفة لمدة 6 أيام، فإذا كنت تبحث عن شرح تفصيلي طويل المدى فقد لا يكون هذا هو الأنسب لك. اقرأ قسم "لمن هذا الملف" بالأسفل جيدًا قبل إتمام الشراء.</span>
+  </div>
 </div>
 
 <!-- لمن الملف -->
 <div class="who-section">
   <div class="who-title">الملف مناسب لك إذا كنت…</div>
   <div class="who-grid">
-    <div class="who-card"><span class="em">🏗️</span><span>تريد تأسيساً قوياً من الصفر في الكمي</span></div>
-    <div class="who-card"><span class="em">⚡</span><span>تبحث عن مراجعة سريعة ومركّزة</span></div>
-    <div class="who-card"><span class="em">📅</span><span>اختبارك قريب وتريد إنجاز أكبر قدر في وقت قصير</span></div>
-    <div class="who-card"><span class="em">🎯</span><span>تريد شرحاً مختصراً مع أسئلة مباشرة لكل موضوع</span></div>
+    <div class="who-card"><span class="em">📅</span><span>باقي على اختبارك شهر تقريبًا او اقل وتحتاج تنهي الكمي بسرعة</span></div>
+    <div class="who-card"><span class="em">🧠</span><span>        ما ذاكرت نهائي وعاوز حاجه سريعه </span></div>
+    <div class="who-card"><span class="em">⚡</span><span> عاوز تتأسس بسرعه ويكون عندك خلفية من غير ما يكون مصدر طويل        </span></div>
+    <div class="who-card"><span class="em">🎯</span><span> ينفع معاك في المراجعة السريعه      </span></div>
+  </div>
+  <div class="who-title" style="margin-top:20px;">قد لا يناسبك إذا كنت…</div>
+  <div class="who-grid">
+    <div class="who-card not-fit"><span class="em">🐣</span><span>مبتدئ تمامًا وتحتاج شرحًا تأسيسيًا بطيئًا وطويل المدى</span></div>
+    <div class="who-card not-fit"><span class="em">🕒</span><span>عندك وقت كافٍ (أكثر من شهر) وتفضل خطة أهدأ وأطول</span></div>
   </div>
 </div>
 
-<!-- محتوى الملف -->
+<!-- محتوى الملف: خطة 6 أيام -->
 <div class="content-section">
   <div class="content-box">
-    <div class="content-title">📋 ماذا يحتوي الملف؟</div>
+    <div class="content-title">📋 خطة الـ 6 أيام</div>
+    <ul class="day-list">
+      <li><span class="day-num">1</span><span>ترتيب العمليات الحسابية - جمع الأعداد المكررة - جمع الأعداد المتتالية - جمع الأعداد المتتالية بالعامل المشترك - جمع الأعداد الزوجية والفردية     </span></li>
+      <li><span class="day-num">2</span><span>الضرب وقسمة الأعداد الكبيرة - عدد المباريات والمصافحات والهدايا - عدد الأشكال والمستطيلات - زمن العمل المشترك والزاوية بين عقربي الساعة - الأعداد المحصورة والمتتالية    </span></li>
+      <li><span class="day-num">3</span><span>الدوريات والأنماط - الكسور - قوانين القسمة والأعداد الأولية - المربع الكامل والتحليل - الأعداد العشرية  </span></li>
+      <li><span class="day-num">4</span><span> الجذور - القوى والأسس - الأسس وقوانينها - المسافة والزمن والسرعة - النسبة المئوية والربح والخسارة  </span></li>
+      <li><span class="day-num">5</span><span> النسبة المئوية والمكسب والخسارة - السعر الأصلي والتخفيض المركب - التناسب الطردي والعكسي - الوسط السحابي والمتوسطات - الاحتمالات    </span></li>
+      <li><span class="day-num">6</span><span>    المثلث وجميع معلوماته - المستطيل والمربع - المعين والمتوازي وشبه المنحرف - الدائرة وجميع معلوماتها - التوازي - الاشكال ثلاثية الابعاد</span></li>
+    </ul>
+    <div class="content-title" style="margin-top:22px;">✅ ماذا يحتوي الملف أيضًا؟</div>
     <ul class="content-list">
-      <li>31 موضوع كمي كامل — من الأساسيات حتى المتقدم</li>
-      <li>شرح مركّز لكل موضوع + 3 أسئلة أصلية تحته مباشرة</li>
-      <li>جدول مذاكرة منظّم يساعدك على توزيع وقتك</li>
-      <li>نصائح عملية وطريقة مذاكرة مجرّبة</li>
+      <li>         طريقة مذاكرتي وتجرتي </li>
+      <li>نصائح مذاكرة مجرّبة لتثبيت المعلومة في وقت قصير</li>
     </ul>
   </div>
 </div>
@@ -489,12 +791,12 @@
 <div class="counter-price-wrap">
   <div class="counter-wrap">
     <div class="counter-label">انضم إليهم وسجّل اشتراكك</div>
-    <div class="counter-num">323</div>
+    <div class="counter-num">374</div>
     <div class="counter-suffix">مشترك وثقوا في الملف 🎯</div>
   </div>
   <div class="price-box">
     <div class="price-main">15 <span>ريال</span></div>
-    <div class="price-note">السعر حساب المجهود فقط — <strong>الهدف الأول إفادتك</strong></div>
+    <div class="price-note">السعر حساب المجهود فقط — <strong>الهدف الأول إفادتك</strong><br>💡 جرّب عجلة الحظ (الأيقونة العائمة أسفل الصفحة) واحصل على خصم إضافي</div>
   </div>
 </div>
 
@@ -539,7 +841,6 @@
       <img src="7.png" onerror="this.style.display='none'" alt="">
       <span class="icon">📄</span><span>ضع صورتك هنا</span>
     </div>
-    <!-- فيديو -->
     <div class="img-card" onclick="openLightbox(this)">
       <video src="v.mp4" muted playsinline preload="metadata"></video>
       <span class="play-icon">▶️</span>
@@ -549,14 +850,11 @@
 
 <div class="divider"></div>
 
-
-
 <!-- سلايدر تعليقات المستفيدين -->
 <div class="section">
   <div class="section-title">💬 آراء المستفيدين</div>
   <div class="slider-wrap">
     <div class="slider-track" id="sliderTrack">
-      <!-- ✏️ ضع صور التعليقات باسم review1.jpg ... review10.jpg في نفس المجلد -->
       <div class="slide-item"><img src="review1.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 1</span></div>
       <div class="slide-item"><img src="review2.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 2</span></div>
       <div class="slide-item"><img src="review3.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 3</span></div>
@@ -567,10 +865,9 @@
       <div class="slide-item"><img src="review8.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 8</span></div>
       <div class="slide-item"><img src="review9.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 9</span></div>
       <div class="slide-item"><img src="review10.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 10</span></div>
-            <div class="slide-item"><img src="review11.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 10</span></div>
-      <div class="slide-item"><img src="review12.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 10</span></div>
-      <div class="slide-item"><img src="review13.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 10</span></div>
-
+      <div class="slide-item"><img src="review11.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 11</span></div>
+      <div class="slide-item"><img src="review12.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 12</span></div>
+      <div class="slide-item"><img src="review13.jpeg" onerror="this.style.display='none'" alt=""><span class="icon">💬</span><span>صورة التعليق 13</span></div>
     </div>
     <button class="slider-btn prev" onclick="moveSlide(-1)">‹</button>
     <button class="slider-btn next" onclick="moveSlide(1)">›</button>
@@ -580,10 +877,42 @@
 
 <div class="divider"></div>
 
+<!-- طرق الدفع -->
+<div class="section">
+  <div class="section-title">💳 طرق الدفع — حوّل مباشرة</div>
+  <div class="pay-grid">
+    <div class="pay-card">
+      <div class="pay-img">
+        <img src="33.jpeg" onerror="this.style.display='none'" alt="">
+        <span class="icon">🏦</span><span>ضع صورة طريقة الدفع هنا</span>
+      </div>
+      <div class="pay-iban-label">رقم الآيبان — اضغط نسخ وحوّل مباشرة</div>
+      <div class="pay-iban-row">
+        <span class="pay-iban-text" id="iban1">SA19 1000 0005 9852 8100 0107
+</span>
+        <button class="pay-copy-btn" onclick="copyIban('iban1', this)">نسخ</button>
+      </div>
+    </div>
+    <div class="pay-card">
+      <div class="pay-img">
+        <img src="22.jpeg" onerror="this.style.display='none'" alt="">
+        <span class="icon">🏦</span><span>ضع صورة طريقة الدفع هنا</span>
+      </div>
+      <div class="pay-iban-label">رقم الآيبان — اضغط نسخ وحوّل مباشرة</div>
+      <div class="pay-iban-row">
+        <span class="pay-iban-text" id="iban2">SA767 8000 0000 0118 5083 938</span>
+        <button class="pay-copy-btn" onclick="copyIban('iban2', this)">نسخ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
 <!-- أزرار التواصل -->
 <div class="cta-wrap">
-  <div class="cta-heading">اشترِ الآن وابدأ رحلتك  🚀<br><span>  بعد الاطلاع أطلب عن طريق وسائل التواصل</span></div>
-  <div class="cta-sub">بعد الشراء شاركنا تقييمك في كومنت التيك توك 🙏</div>
+  <div class="cta-heading">اشترِ الآن وابدأ رحلتك 🚀<br><span>بعد الاطلاع أطلب عن طريق وسائل التواصل</span></div>
+  <div class="cta-sub">إذا لفيت عجلة الحظ، أرسل لنا سكرين شوت لنسبة الخصم ليتم تفعيلها عند الطلب — وبعد الشراء شاركنا تقييمك في كومنت التيك توك 🙏</div>
   <div class="btn-row">
     <a class="btn-cta btn-wa"     href="https://wa.me/966547856086"                                   target="_blank"> واتساب</a>
     <a class="btn-cta btn-insta"  href="https://instagram.com/dr_hith_oom"                            target="_blank"> انستا</a>
@@ -591,6 +920,56 @@
     <a class="btn-cta btn-tiktok" href="https://www.tiktok.com/@dr_hith_oom?_r=1&_t=ZS-96ZTfEGlpa8" target="_blank"> تيك توك</a>
   </div>
   <div class="cta-note" style="margin-top:10px; color:rgba(252, 248, 12, 0.973);">جهد حقيقي قُدِّم بصدق لأجلك — ادعُ لي ولوالديّ 🤍</div>
+</div>
+
+<!-- زر العجلة العائم -->
+<div class="wheel-fab" id="wheelFab" onclick="openWheelModal()">
+  <span class="fab-label">جرّب حظك 🎁</span>
+  🎡
+  <span class="fab-badge" id="fabBadge">خصم!</span>
+</div>
+
+<!-- نافذة عجلة الحظ -->
+<div id="wheelModal">
+  <div class="wheel-modal-inner">
+    <div id="wheelModal-close" onclick="closeWheelModal()">✕</div>
+    <div class="wheel-card">
+      <div class="section-title" style="justify-content:center;"><span style="flex:none;">🎡 عجلة الحظ — اربح خصمك</span></div>
+      <p class="wheel-intro">لف العجلة واحصل على نسبة خصم فورية على ملف الكمي.<br>لكل شخص <strong style="color:#F5A623;">3 محاولات فقط</strong>، والعرض ساري لمدة <strong style="color:#F5A623;">3 أيام</strong> من وقت لفّة العجلة.</p>
+      <div class="wheel-attempts" id="attemptsLabel">لديك 3 محاولات من 3</div>
+
+      <div class="wheel-outer">
+        <div class="wheel-pointer"></div>
+        <div class="wheel" id="wheelEl">
+          <div class="wheel-labels" id="wheelLabels"></div>
+        </div>
+        <div class="wheel-center">🍀</div>
+      </div>
+
+      <button class="btn-spin" id="spinBtn" onclick="spinWheel()">لف العجلة 🎯</button>
+      <div class="wheel-done-msg" id="doneMsg" style="display:none;">
+        لقد استخدمت جميع محاولاتك الثلاث. تواصل معنا عبر وسائل التواصل بالأسفل وأرسل صورة (سكرين شوت) لآخر نتيجة ظهرت لك.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة نتيجة العجلة -->
+<div id="resultModal">
+  <div class="result-box">
+    <div class="result-emoji" id="resEmoji">🎉</div>
+    <div class="result-title" id="resTitle">مبروك!</div>
+    <div class="result-sub" id="resSub">هذه نتيجتك من عجلة الحظ</div>
+    <div class="result-code-label">نسبة خصمك</div>
+    <div class="result-percent" id="resPercent">0%</div>
+    <div class="result-price-row" id="resPriceRow">
+      <span class="result-old" id="resOld">15 ريال</span>
+      <span class="result-new" id="resNew">15 ريال</span>
+    </div>
+    <div class="result-expiry" id="resExpiry"></div>
+    <div class="result-note">📸 خذ سكرين شوت لهذه النتيجة وأرسله عبر واتساب أو تيليجرام ليتم تفعيل خصمك عند الطلب.</div>
+    <button class="btn-close-result" onclick="closeResult()">إغلاق</button>
+  </div>
 </div>
 
 <!-- Lightbox -->
@@ -629,40 +1008,220 @@
   });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
+  /* ── نسخ الآيبان ── */
+  function copyIban(id, btn) {
+    const text = document.getElementById(id).textContent.trim();
+    const done = () => {
+      const original = btn.textContent;
+      btn.textContent = 'تم النسخ ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1800);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(done);
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      done();
+    }
+  }
+
   /* ── سلايدر ── */
   const track = document.getElementById('sliderTrack');
   const dotsWrap = document.getElementById('sliderDots');
-  const total = track.children.length;
-  let current = 0;
-  for (let i = 0; i < total; i++) {
+  const totalSlides = track.children.length;
+  let currentSlide = 0;
+  for (let i = 0; i < totalSlides; i++) {
     const d = document.createElement('div');
     d.className = 'dot-ind' + (i === 0 ? ' active' : '');
     d.onclick = () => goTo(i);
     dotsWrap.appendChild(d);
   }
   function goTo(n) {
-    current = (n + total) % total;
-    track.style.transform = `translateX(${current * 100}%)`;
-    document.querySelectorAll('.dot-ind').forEach((d, i) => d.classList.toggle('active', i === current));
+    currentSlide = (n + totalSlides) % totalSlides;
+    track.style.transform = `translateX(${currentSlide * 100}%)`;
+    document.querySelectorAll('.dot-ind').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
   }
-  function moveSlide(dir) { goTo(current - dir); }
+  function moveSlide(dir) { goTo(currentSlide - dir); }
   setInterval(() => moveSlide(1), 4000);
 
-  /* ── عداد PDF ── */
-  let seconds = 120;
-  const timerEl = document.getElementById('pdf-timer');
-  const overlay = document.getElementById('pdf-overlay');
-  const pdfInt = setInterval(() => {
-    seconds--;
-    const m = Math.floor(seconds / 60);
-    const s = seconds % 60;
-    timerEl.textContent = `${m}:${s.toString().padStart(2,'0')}`;
-    if (seconds <= 0) {
-      clearInterval(pdfInt);
-      overlay.classList.add('show');
-      // document.getElementById('pdf-frame').src = '';
+  /* ── نافذة عجلة الحظ (فتح/إغلاق من الأيقونة العائمة) ── */
+  function openWheelModal() {
+    document.getElementById('wheelModal').classList.add('open');
+    const badge = document.getElementById('fabBadge');
+    if (badge) badge.style.display = 'none';
+  }
+  function closeWheelModal() {
+    document.getElementById('wheelModal').classList.remove('open');
+  }
+  document.getElementById('wheelModal').addEventListener('click', function(e) {
+    if (e.target === this) closeWheelModal();
+  });
+
+  /* ══════════ عجلة الحظ ══════════ */
+  // كل قطاع له وزن احتمالية (weight) يحدد فرصة الفوز به — الأوزان مصممة بحيث
+  // تكون نسب الخصم الصغيرة الأعلى حظًا، ونسبة الخصم الكبرى نادرة جدًا.
+  const segments = [
+    { label: 'حظ أوفر 🍀',        price: 15, weight: 26, color: '#241a42' },
+    { label: '13 ريال',           price: 13, weight: 20, color: '#3a2a5c' },
+    { label: '12 ريال',           price: 12, weight: 18, color: '#4a2f73' },
+    { label: '10 ريال',           price: 10, weight: 15, color: '#5c3490' },
+    { label: '9 ريال',            price: 9,  weight: 10, color: '#6C3CE1' },
+    { label: '8 ريال',            price: 8,  weight: 6,  color: '#8a4ce0' },
+    { label: '6 ريال',            price: 6,  weight: 4,  color: '#c77c2e' },
+    { label: '🏆 الجائزة الكبرى',  price: 5,  weight: 1,  color: '#F5A623' }
+  ];
+  const segAngle = 360 / segments.length;
+  const originalPrice = 15;
+  const MAX_ATTEMPTS = 3;
+
+  const wheelEl = document.getElementById('wheelEl');
+  const labelsWrap = document.getElementById('wheelLabels');
+  const spinBtn = document.getElementById('spinBtn');
+  const attemptsLabel = document.getElementById('attemptsLabel');
+  const doneMsg = document.getElementById('doneMsg');
+
+  // رسم قطاعات العجلة (conic-gradient) وتسمياتها
+  function buildWheel() {
+    let gradientParts = [];
+    segments.forEach((seg, i) => {
+      const start = i * segAngle;
+      const end = (i + 1) * segAngle;
+      gradientParts.push(`${seg.color} ${start}deg ${end}deg`);
+    });
+    wheelEl.style.background = `conic-gradient(${gradientParts.join(',')})`;
+
+    // نحط كل تسمية بإحداثيات x,y محسوبة مباشرة (بدل الاعتماد على ترتيب
+    // rotate()/translate() اللي كان بيسبب انزياح النص عن قطاعه الصحيح).
+    // الزاوية 0 = الأعلى (اتجاه المؤشر)، وتزيد في اتجاه عقارب الساعة —
+    // بالظبط نفس تعريف conic-gradient اللي بيرسم القطاعات الملوّنة.
+    const labelRadius = 90; // نصف قطر موضع النص داخل العجلة
+    labelsWrap.innerHTML = '';
+    segments.forEach((seg, i) => {
+      const centerAngle = i * segAngle + segAngle / 2;
+      const theta = centerAngle * Math.PI / 180;
+      const x = labelRadius * Math.sin(theta);
+      const y = -labelRadius * Math.cos(theta);
+      const span = document.createElement('span');
+      span.textContent = seg.label;
+      // نحط النص عند نقطته بمنتصف العجلة + الإحداثيات المحسوبة، ونستخدم
+      // translate(-50%,-50%) بس عشان نمركز صندوق النص فوق النقطة —
+      // ده مش بيغيّر زاوية القطاع، بس بيوسّط الشكل.
+      span.style.left = `calc(50% + ${x}px)`;
+      span.style.top = `calc(50% + ${y}px)`;
+      span.style.transform = `translate(-50%, -50%) rotate(${centerAngle}deg)`;
+      labelsWrap.appendChild(span);
+    });
+  }
+  buildWheel();
+
+  function getAttemptsLeft() {
+    const stored = localStorage.getItem('qdr_wheel_attempts_left');
+    if (stored === null) return MAX_ATTEMPTS;
+    return parseInt(stored, 10);
+  }
+  function setAttemptsLeft(n) {
+    localStorage.setItem('qdr_wheel_attempts_left', n);
+  }
+  function updateAttemptsUI() {
+    const left = getAttemptsLeft();
+    attemptsLabel.textContent = `لديك ${left} محاولات من ${MAX_ATTEMPTS}`;
+    if (left <= 0) {
+      spinBtn.disabled = true;
+      spinBtn.textContent = 'انتهت محاولاتك';
+      doneMsg.style.display = 'block';
     }
-  }, 1000);
+  }
+  updateAttemptsUI();
+
+  function weightedPick() {
+    const totalWeight = segments.reduce((s, seg) => s + seg.weight, 0);
+    let r = Math.random() * totalWeight;
+    for (const seg of segments) {
+      if (r < seg.weight) return seg;
+      r -= seg.weight;
+    }
+    return segments[0];
+  }
+
+  let spinCount = 0;   // عدد مرات اللف حتى الآن في هذه الجلسة
+  let spinning = false;
+  const fullSpins = 6 * 360; // لفة كاملة إضافية (مضاعف لـ 360) لكل محاولة
+
+  function spinWheel() {
+    if (spinning) return;
+    const left = getAttemptsLeft();
+    if (left <= 0) return;
+
+    spinning = true;
+    spinBtn.disabled = true;
+
+    setAttemptsLeft(left - 1);
+
+    const picked = weightedPick();
+    const idx = segments.indexOf(picked);
+    const targetCenter = idx * segAngle + segAngle / 2;
+    const wobble = (Math.random() * segAngle * 0.5) - (segAngle * 0.25);
+
+    // الزاوية النهائية (mod 360) المطلوبة عشان مركز القطاع المُختار يوصل
+    // بالظبط تحت المؤشر (0 درجة = الأعلى).
+    const desiredMod = (((360 - targetCenter) + wobble) % 360 + 360) % 360;
+
+    // بما إن spinCount * 2160 هو دايمًا مضاعف لـ 360، فإضافته للزاوية المطلوبة
+    // بيضمن إن دوران العجلة يزيد دايمًا للأمام (تأثير بصري صحيح للف)
+    // وفي نفس الوقت النتيجة النهائية (mod 360) بتساوي desiredMod بالظبط —
+    // مفيش اعتماد على "باقي" أي لفة سابقة، فمفيش مجال لتراكم خطأ.
+    spinCount++;
+    const rotation = spinCount * fullSpins + desiredMod;
+    wheelEl.style.transform = `rotate(${rotation}deg)`;
+
+    setTimeout(() => {
+      showResult(picked);
+      spinning = false;
+      updateAttemptsUI();
+    }, 4300);
+  }
+
+  function showResult(seg) {
+    const modal = document.getElementById('resultModal');
+    const finalPrice = seg.price;
+    const isFullPrice = finalPrice >= originalPrice;
+
+    const today = new Date();
+    const expiry = new Date(today);
+    expiry.setDate(today.getDate() + 3);
+    const fmt = d => `${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear()}`;
+
+    document.getElementById('resEmoji').textContent = finalPrice <= 5 ? '🏆' : (isFullPrice ? '🍀' : '🎉');
+    document.getElementById('resTitle').textContent = isFullPrice
+      ? 'حظ أوفر هالمرة 🍀'
+      : `مبروك! الملف معاك بسعر ${finalPrice} ريال`;
+    document.getElementById('resSub').textContent = seg.label;
+
+    document.getElementById('resPercent').textContent = `${finalPrice} ريال`;
+
+    document.getElementById('resOld').textContent = `${originalPrice} ريال`;
+    document.getElementById('resNew').textContent = `${finalPrice} ريال`;
+    document.getElementById('resPriceRow').style.display = isFullPrice ? 'none' : 'flex';
+
+    document.getElementById('resExpiry').innerHTML = isFullPrice
+      ? `السعر يفضل زي ما هو (${originalPrice} ريال) — جرّب حظك مرة ثانية إذا عندك محاولات متبقية 🍀`
+      : `السعر ده ساري لحد <strong>${fmt(expiry)}</strong> (3 أيام من الآن)`;
+
+    const noteEl = document.querySelector('.result-note');
+    noteEl.innerHTML = isFullPrice
+      ? `📸 خذ سكرين شوت لهذه النتيجة، وحوّل السعر الأصلي (${originalPrice} ريال) وأرسل لنا صورة إيصال التحويل على واتساب واستلم الملف مباشرة.`
+      : `📸 خذ سكرين شوت لهذه النتيجة، وحوّل مبلغ <strong>${finalPrice} ريال</strong> على أحد الحسابات بالأسفل، وأرسل لنا سكرين شوت النتيجة + إيصال التحويل على واتساب، وراح تستلم الملف مباشرة 🚀`;
+
+    modal.classList.add('open');
+  }
+  function closeResult() {
+    document.getElementById('resultModal').classList.remove('open');
+  }
 </script>
 </body>
 </html>
